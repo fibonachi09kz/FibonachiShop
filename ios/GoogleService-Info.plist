@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyDlyYZQeu9-hdaTSOY_9QDk3TWn5AdkfbA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1035138577893</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.FibonachiShop</string>
+	<key>PROJECT_ID</key>
+	<string>fibonachishop-60cf6</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fibonachishop-60cf6.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1035138577893:ios:e4e4a5e40b8166bbe86b0c</string>
+</dict>
+</plist>
