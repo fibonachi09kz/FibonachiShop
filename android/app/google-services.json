@@ -12,7 +12,20 @@
           "package_name": "com.fibonachishop"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1035138577893-snp97fksb7500i5vcdu3fjijjb3ibuci.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fibonachishop",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1035138577893-7u5kif04tgfomu113dgdj45l031512o0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBqKvRYhWn4fC75Pd3kOVOsUkMVDSh5XkI"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1035138577893-7u5kif04tgfomu113dgdj45l031512o0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1035138577893-9re937412dv72lpbm6sd8pdejh6ho681.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.FibonachiShop"
+              }
+            }
+          ]
         }
       }
     }

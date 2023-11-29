@@ -8,13 +8,13 @@ import { actions as basketActions } from "../store/basket/basket.slice";
 import { actions as userActions } from "../store/user/user.slice";
 
 const rootActions = {
-    ...favoritesActions,
-    ...basketActions,
-    ...userActions
+	...favoritesActions,
+	...basketActions,
+	...userActions
 }
 
 export const useActions = () => {
-    const dispatch = useDispatch()
+	const dispatch = useDispatch()
 
-    return useMemo(() => bindActionCreators(rootActions, dispatch), [dispatch])
+	return useMemo(() => bindActionCreators(rootActions, dispatch), [dispatch])
 }
