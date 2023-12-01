@@ -22,6 +22,10 @@ export const getBXElementList = async (params) => {
 	return await response.json();
 }
 
+export const getBXSectionList = async (params) => {
+	const response = await fetch(API_CONSTANTS.IBLOCK_SECTION_LIST + '?' + new URLSearchParams(params).toString());
+	return await response.json();
+}
 
 export const getUserByGoogle = async (token) => {
 	const response = await fetch(API_CONSTANTS.USER_AUTH_BY_GOOGLE, {
