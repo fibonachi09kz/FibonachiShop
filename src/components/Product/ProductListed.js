@@ -5,20 +5,20 @@ import { COLORS } from "../../constants/colors";
 import { useSelector } from "react-redux";
 import { useActions } from "../../hooks/useActions";
 import { memo } from "react";
-
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 const ProductListed = ({ product, pressHandler }) => {
-	
+
 	const [count, setCount] = useState(1)
-	
-	const isFavorite = useSelector(state => state.favorites.includes(product.id));
+
+	const isFavorite = useSelector(state => state.favorites.includes(product['ID']));
 	const { toggleFavorites } = useActions()
-	
-	const basketItem = useSelector(state => state.basket.find(item => item.id === product.id));
+
+	const basketItem = useSelector(state => state.basket.find(item => item.id === product['ID']));
 	const { addToBasket, removeFromBasket } = useActions()
 	let countInBasket = basketItem ? basketItem.count : 0;
-	
-	
+
+
 
 	const inc = () => {
 		if (count !== 99) {
@@ -30,21 +30,20 @@ const ProductListed = ({ product, pressHandler }) => {
 			setCount(count - 1)
 		}
 	}
-	
+
 	const basketHandler = () => {
 		if (countInBasket) {
-			removeFromBasket(product.id);
+			removeFromBasket(product['ID']);
 		} else {
 			addToBasket({
-				id: product.id,
+				id: product['ID'],
 				count: count
 			});
-			Vibration.vibrate();
 		}
 	}
 
 	return (
-		<TouchableOpacity key={product.id} style={styles.productItem} activeOpacity={0.7} onPress={() => pressHandler(product)}>
+		<TouchableOpacity key={product.id} style={styles.productItem} activeOpacity={0.7}>
 			<View style={styles.imageWrapper}>
 				<Image
 					source={{
@@ -57,28 +56,28 @@ const ProductListed = ({ product, pressHandler }) => {
 
 			<View style={styles.infoWrapper}>
 				<View style={styles.titleWrapper}>
-					<Text style={styles.productTitle} numberOfLines={1}>{product.title}</Text>
-					<TouchableOpacity style={styles.favoriteBtn} onPress={() => toggleFavorites(product.id)}>
+					<Text style={styles.productTitle} numberOfLines={1}>{product['NAME']}</Text>
+					<TouchableOpacity style={styles.favoriteBtn} onPress={() => toggleFavorites(product['ID'])}>
 						{isFavorite
 							?
-							<Text>Иконка</Text>
+							<AntDesign name="heart" size={24} color="#d7000f" />
 							:
-							<Text>Иконка</Text>
+							<AntDesign name="hearto" size={24} color="#d7000f" />
 						}
 					</TouchableOpacity>
 				</View>
 
 				<Text style={styles.productDescription} numberOfLines={2}>{product.description}</Text>
-				<Text style={styles.productPrice}>{product.price} <Text>{CURRENCIES[0].symbol}</Text></Text>
+				<Text style={styles.productPrice}>1000 <Text>{CURRENCIES[0].symbol}</Text></Text>
 
 				<View style={styles.actions}>
 					<View style={styles.actionsWrapper}>
 						<TouchableOpacity style={styles.minus} onPress={dec}>
-							{/*<AntDesign name="minus" size={24} color="#d7000f" />*/}
+							<AntDesign name="minus" size={24} color="#d7000f" />
 						</TouchableOpacity>
 						<Text style={styles.count}>{count}</Text>
 						<TouchableOpacity style={styles.plus} onPress={inc}>
-							{/*<AntDesign name="plus" size={24} color="#d7000f" />*/}
+							<AntDesign name="plus" size={24} color="#d7000f" />
 						</TouchableOpacity>
 					</View>
 					<TouchableOpacity activeOpacity={0.5} style={[styles.toBasket, {backgroundColor: countInBasket ? "#12af00" : COLORS.mainRed}]} onPress={() => basketHandler()}>
@@ -88,7 +87,7 @@ const ProductListed = ({ product, pressHandler }) => {
 							)
 							:
 							(
-								<Text style={styles.toBasketText}>В корзину {count * product.price} {CURRENCIES[0].symbol}</Text>
+								<Text style={styles.toBasketText}>В корзину {count * 1000} {CURRENCIES[0].symbol}</Text>
 							)
 						}
 					</TouchableOpacity>

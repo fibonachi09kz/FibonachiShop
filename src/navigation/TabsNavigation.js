@@ -3,10 +3,10 @@ import {Text, TouchableOpacity} from "react-native";
 import {COLORS} from "../constants/colors";
 import {
 	StackNavigatorAuth,
-	StackNavigatorCart,
+	StackNavigatorCart, StackNavigatorCatalog,
 	StackNavigatorCategories,
 	StackNavigatorFavorite,
-	StackNavigatorHome, StackNavigatorProfile
+	StackNavigatorHome, StackNavigatorProfile,
 } from "./StackNavigation";
 import {useSelector} from "react-redux";
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -39,10 +39,10 @@ const TabsNavigation = () => {
 				}}
 			/>
 			<Tab.Screen
-				name="CategoriesStack"
-				component={StackNavigatorCategories}
+				name="CatalogStack"
+				component={StackNavigatorCatalog}
 				options={{
-					title: "Категории",
+					title: "Каталог",
 					tabBarButton: (props) => <TouchableOpacity {...props} />,
 					tabBarIcon: ({ focused }) => <Ionicons name={'grid'} size={24} color={focused ? COLORS.mainRed : '#AFAFAF'} />,
 					tabBarShowLabel: true,

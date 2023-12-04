@@ -16,6 +16,7 @@ import {useSelector} from "react-redux";
 import {useActions} from "../hooks/useActions";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import CatalogScreen from "../screens/Catalog/CatalogScreen";
 
 const Stack = createStackNavigator();
 
@@ -111,6 +112,32 @@ export const StackNavigatorCategories = ({ navigation }) => {
 		</Stack.Navigator>
 	);
 }
+
+
+export const StackNavigatorCatalog = ({ navigation }) => {
+
+	return (
+		<Stack.Navigator
+			initialRouteName="Catalog"
+		>
+			<Stack.Screen
+				name="Catalog"
+				component={CatalogScreen}
+				options={{
+					headerTitle: "",
+					headerLeft: () => (
+						<TouchableOpacity style={styles.menuBtn} onPress={() => navigation.openDrawer()}>
+							<Ionicons name={'list'} size={28} />
+						</TouchableOpacity>
+					)
+				}}
+			/>
+
+
+		</Stack.Navigator>
+	);
+}
+
 
 
 export const StackNavigatorCart = ({ navigation }) => {

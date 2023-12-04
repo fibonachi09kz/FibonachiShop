@@ -2,33 +2,53 @@ import { FlatList, View, StyleSheet, Text } from "react-native";
 import CategoryItem from "./CategoryItem";
 import { CATEGORIES } from "../../data/placeholder";
 import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
+import { LoaderScreen } from "react-native-ui-lib";
+import { getBXSectionList } from "../../utils/fetching";
 
 const CategoriesBlock = () => {
 
+	const [loading, setLoading] = useState(true)
+	const [categories, setCategories] = useState([])
+
+	useEffect(() => {
+		async function fetchCategories() {
+			const catList = await getBXSectionList({
+				iblockId: 26
+			})
+
+		}
+	}, [])
 	const navigation = useNavigation()
 
 	const pressHandler = (category) => {
 
 	}
 
+
+
 	return (
 		<View style={styles.container}>
-
-			<Text style={styles.title}>Категории</Text>
-
-			<FlatList
-				data={CATEGORIES}
-				keyExtractor={(item) => item.id}
-				renderItem={(category) => (
-					<CategoryItem
-						pressHandler={() => pressHandler(category.item)}
-						category={category.item}
+			{loading ? (
+				<LoaderScreen message={'Загрузка категорий, пожалуйста подождите...'} loaderColor={'#777'}/>
+			): (
+				<>
+					<Text style={styles.title}>Категорииss</Text>
+					<FlatList
+						data={categories}
+						keyExtractor={(item) => item.id}
+						renderItem={(category) => (
+							<CategoryItem
+								category={category.item}
+							/>
+						)}
+						horizontal={true}
+						contentContainerStyle={{columnGap: 16}}
+						showsHorizontalScrollIndicator={false}
 					/>
-				)}
-				horizontal={true}
-				contentContainerStyle={{columnGap: 16}}
-				showsHorizontalScrollIndicator={false}
-			/>
+				</>
+			)}
+
 		</View>
 	)
 }

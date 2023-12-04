@@ -1,38 +1,67 @@
 import {Text, FlatList, TouchableOpacity, StyleSheet, View, Image, ScrollView} from "react-native";
 import {CATEGORIES} from "../../data/placeholder";
+import { useEffect, useState } from "react";
+import { getBXSectionList } from "../../utils/fetching";
+import CategoryItem from "../../components/CategoriesBlock/CategoryItem";
+import { LoaderScreen } from "react-native-ui-lib";
 
 
 const CategoriesScreen = ({ navigation }) => {
 
+	const [categories, setCategories] = useState([]);
+	const [error, setError] = useState(false);
+	const [loading, setLoading] = useState(true);
+
 	const pressHandler = (category) => {
 		navigation.navigate("ProductList", {
-			category: category
+			category: category.item['ID']
 		})
 	}
 
+	useEffect(() => {
+		async function getCategories() {
+			const cats = await getBXSectionList({
+				iblockId: 26
+			})
+			if (cats.result.length) {
+				setCategories(cats.result)
+				setLoading(false)
+			}
+		}
+		getCategories()
+	}, [])
+
 	return (
-		<ScrollView style={styles.main} >
-			<Text style={styles.title}>Категории</Text>
-			<View style={styles.items}>
-				{CATEGORIES.map((item) => (
-					<TouchableOpacity
-						key={item.id}
-						style={styles.categoryItem}
-						activeOpacity={0.7}
-						onPress={() => pressHandler(item)
-						}>
-						<View style={styles.categoryInner}>
-							<View style={styles.categoryImageWrapper}>
-								<Image style={styles.categoryImage} source={{uri: item.imageUrl ? item.imageUrl : "https://icon-library.com/images/not-found-icon/not-found-icon-28.jpg"}} resizeMode="cover" />
-							</View>
-							<View style={styles.categoryBody}>
-								<Text style={styles.categoryTitle}>{item.title}</Text>
-							</View>
-						</View>
-					</TouchableOpacity>
-				))}
-			</View>
-		</ScrollView>
+		<View style={styles.main} >
+			{loading ? (
+				<LoaderScreen message={'Загрузка категорий, пожалуйста подождите...'} loaderColor={'#777'}/>
+			) : (
+				<>
+					<Text style={styles.title}>Категории</Text>
+					<FlatList
+						data={categories}
+						keyExtractor={(item) => item['ID']}
+						renderItem={(category) => (
+							<TouchableOpacity
+								key={category.item['ID']}
+								style={styles.categoryItem}
+								activeOpacity={0.7}
+								onPress={() => pressHandler(category)
+								}>
+								<View style={styles.categoryInner}>
+									<View style={styles.categoryBody}>
+										<Text style={styles.categoryTitle}>{category.item['NAME']}</Text>
+									</View>
+								</View>
+							</TouchableOpacity>
+						)}
+						contentContainerStyle={{columnGap: 16}}
+						showsHorizontalScrollIndicator={false}
+					/>
+				</>
+			)}
+
+		</View>
 	)
 }
 

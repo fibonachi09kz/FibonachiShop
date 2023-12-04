@@ -1,35 +1,29 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 
 
-function CategoryItem({ pressHandler, category }) {
-
-	const icon = category.icon()
+function CategoryItem({ category, pressHandler }) {
 
 	return (
-		<Pressable style={styles.container} onPress={pressHandler}>
-			<View style={styles.icon}>{icon}</View>
-			<Text style={styles.title}>{category.title}</Text>
+		<Pressable style={styles.container} onPress={() => pressHandler(category['ID'])}>
+			<Text style={styles.title}>{category['NAME']}</Text>
 		</Pressable>
 	);
 }
 
 const styles = StyleSheet.create({
 	container: {
-		alignItems: "center",
-		width: 90
-	},
-	icon: {
-		backgroundColor: "#f1f1f1",
-		paddingVertical: 10,
-		paddingHorizontal: 20,
-		borderRadius: 8,
-		flex: 0,
-		marginBottom: 10
+		borderRadius: 6,
+		borderWidth: 1,
+		borderStyle: "solid",
+		borderColor: "#e0e0e0",
+		marginBottom: 10,
+		padding: 15,
+		backgroundColor: '#fff'
 	},
 	title: {
-		fontSize: 14,
+		fontSize: 16,
 		textAlign: "center",
-		fontWeight: "500"
+		fontWeight: "600"
 	}
 })
 
