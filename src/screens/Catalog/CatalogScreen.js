@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import CatalogCategories from "../../components/Catalog/CatalogCategories";
 import { getBXElementList, getBXSectionList } from "../../utils/fetching";
 import CatalogProducts from "../../components/Catalog/CatalogProducts";
@@ -41,7 +41,7 @@ const CatalogScreen = ({navigation}) => {
 	}, [])
 
 	return (
-		<View>
+		<ScrollView>
 			{loading ? <LoaderScreen message={'Загрузка категорий, пожалуйста подождите...'} loaderColor={'#777'}/> : (
 				<>
 					<View style={styles.catalogCategories}>
@@ -54,7 +54,7 @@ const CatalogScreen = ({navigation}) => {
 				</>
 			)}
 
-		</View>
+		</ScrollView>
 
 	)
 

@@ -3,14 +3,32 @@ import ProductListed from "../../components/Product/ProductListed";
 import {PRODUCTS} from "../../data/placeholder";
 import {COLORS} from "../../constants/colors";
 import {useSelector} from "react-redux";
+import { useEffect, useState } from "react";
+import { getBXElementList } from "../../utils/fetching";
+import { useNavigation } from "@react-navigation/native";
 
 const FavoritesScreen = ({ navigation }) => {
-
+	const router = useNavigation()
+	const [products, setProducts] = useState([]);
+	const [filteredProducts, setFilteredProducts] = useState([])
 	const favorites = useSelector(state => state.favorites)
 
-	const filteredProducts = PRODUCTS.filter((product) =>
-		favorites.some(r => r === product.id)
-	);
+	useEffect(() => {
+		async function getProducts() {
+			const data = await getBXElementList({
+				iblockId: 26
+			})
+			if (data.result.elements.length) {
+				setFilteredProducts(data.result.elements.filter((product) =>
+					favorites.some(r => r === product['ID'])
+				))
+
+			}
+		}
+		getProducts()
+	}, [favorites])
+
+
 
 	const pressHandler = (product) => {
 		navigation.push("ProductDetail", {
