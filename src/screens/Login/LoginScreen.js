@@ -23,6 +23,9 @@ import { useSelector } from "react-redux";
 import { useActions } from "../../hooks/useActions";
 import {useNavigation} from "@react-navigation/native";
 import { Colors, LoaderScreen } from "react-native-ui-lib";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import { Screen } from "react-native-screens";
 
 GoogleSignin.configure(googleConfig);
 
@@ -119,6 +122,23 @@ const LoginScreen = ({ navigation }) => {
 				contentContainerStyle={styles.scrollView}
 				keyboardShouldPersistTaps="handled"
 			>
+				<View style={styles.textContainer}>
+					<Text style={styles.title}>Добро пожаловать!</Text>
+				</View>
+				<TouchableOpacity style={styles.googleBtn} onPress={()=> onGoogleButtonPress()}>
+					<Fontisto style={styles.googleBtnIcon} name={'google'} size={22} color={'#000'} />
+					<Text style={styles.googleBtnText}>Войти через Google</Text>
+				</TouchableOpacity>
+			</ScrollView>
+		</SafeAreaView>
+	)
+
+	return (
+		<SafeAreaView style={styles.container}>
+			<ScrollView
+				contentContainerStyle={styles.scrollView}
+				keyboardShouldPersistTaps="handled"
+			>
 				{/*{userInfo ? (*/}
 				{/*	<View style={styles.logoContainer}>*/}
 				{/*		<Text>Авторизационные данные:</Text>*/}
@@ -197,7 +217,8 @@ const LoginScreen = ({ navigation }) => {
 						<Text style={styles.relinkText}>Зарегистрироваться</Text>
 					</TouchableOpacity>
 				</View>
-				<GoogleSigninButton onPress={()=> onGoogleButtonPress()} />
+
+
 
 
 				<Text>{user.email}</Text>
@@ -302,6 +323,32 @@ const styles = StyleSheet.create({
 		marginTop: 10,
 		height: 44,
 		borderRadius: 6
+	},
+	googleBtn: {
+		padding: 10,
+		borderWidth: 1,
+		borderColor: '#99999970',
+		backgroundColor: '#fff',
+		borderRadius: 5,
+		marginTop: 30,
+		flexDirection: 'row',
+		gap: 8,
+		alignItems: 'center',
+		justifyContent: 'center',
+		position: 'relative'
+	},
+	googleBtnText: {
+		color: COLORS.mainText,
+		fontSize: 18,
+		marginHorizontal: 'auto',
+		display: 'flex',
+		flex: 1,
+		textAlign: 'center'
+	},
+	googleBtnIcon: {
+		marginRight: 'auto',
+		position: 'absolute',
+		left: 10
 	}
 });
 

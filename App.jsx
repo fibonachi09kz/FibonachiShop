@@ -1,37 +1,19 @@
-import {Provider} from "react-redux";
-import {StatusBar, View} from "react-native";
+import { Provider, useSelector } from "react-redux";
 import {store} from "./src/store/store";
-import {NavigationContainer} from "@react-navigation/native";
-import DrawerNavigation from "./src/navigation/DrawerNavigation";
 import {SafeAreaProvider} from "react-native-safe-area-context";
-import {useEffect} from "react";
-import {deviceInfoAction} from "./src/utils/deviceInfo";
+import EntryPoint from "./src/screens/EntryPoint";
 
 const App = () => {
 
-useEffect(() => {
-deviceInfoAction()
-}, [])
+	return (
+		<SafeAreaProvider>
+			<Provider store={store}>
 
-return (
-	<SafeAreaProvider>
-		<Provider store={store}>
+				<EntryPoint />
 
-			<StatusBar />
-
-			<View style={{ flex: 1 }}>
-
-				<NavigationContainer>
-
-					<DrawerNavigation />
-
-				</NavigationContainer>
-
-			</View>
-
-		</Provider>
-	</SafeAreaProvider>
-);
+			</Provider>
+		</SafeAreaProvider>
+	);
 }
 
 

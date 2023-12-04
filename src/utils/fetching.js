@@ -1,4 +1,5 @@
 import API_CONSTANTS from "../constants/API";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const addBXElement = async (element) => {
 	const response = await fetch(API_CONSTANTS.IBLOCK_ELEMENT_ADD, {

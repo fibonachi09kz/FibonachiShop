@@ -30,26 +30,29 @@ const ProfileScreen = ({ navigation }) => {
 
 	return (
 		<ScrollView style={styles.main}>
-			<Text style={styles.title}>Привет, {user.user['EMAIL']}!</Text>
+			{!user.user['NAME'] && !user.user['LAST_NAME'] ?
+				(
+					<Text style={styles.title}>Привет!</Text>
+				)
+				:
+				(
+					<Text style={styles.title}>Привет, {user.user['NAME']} {user.user['LAST_NAME']}!</Text>
+				)
+			}
 			<View>
-				{/*<ScrollView*/}
-				{/*	horizontal*/}
-				{/*	contentContainerStyle={{gap: 20}}*/}
-				{/*>*/}
-				{/*	<TouchableOpacity>*/}
-				{/*		<Text>Бонусы</Text>*/}
-				{/*		<Text>1490</Text>*/}
-				{/*	</TouchableOpacity>*/}
-				{/*	<TouchableOpacity>*/}
-				{/*		<Text>История заказов</Text>*/}
-				{/*		<Text>13 заказов</Text>*/}
-				{/*	</TouchableOpacity>*/}
-				{/*	<TouchableOpacity>*/}
-				{/*		<Text>3 адреса</Text>*/}
-				{/*	</TouchableOpacity>*/}
-				{/*</ScrollView>*/}
-				<Text>Email: {user.user['EMAIL']}</Text>
-				<Text>TOKEN: {user.token}</Text>
+				{!user.user['NAME'] && !user.user['LAST_NAME'] ?
+					(
+						<TouchableOpacity style={styles.userInfoAlert} activeOpacity={0.7}>
+							<Text style={styles.userInfoAlertText}>Заполните, пожалуйста личные данные</Text>
+							<MaterialIcons name={'chevron-right'} size={20} />
+						</TouchableOpacity>
+					)
+					:
+					null
+				}
+				<Text>Ваша почта: {user.user['EMAIL']}</Text>
+				<Text>Ваш токен: {user.token}</Text>
+				<Text>Время регистрации: {user.user['DATE_REGISTER']}</Text>
 			</View>
 		</ScrollView>
 	);
@@ -69,6 +72,20 @@ const styles = StyleSheet.create({
 	},
 	settingsBtn: {
 		marginHorizontal: 16
+	},
+	userInfoAlert: {
+		paddingHorizontal: 10,
+		paddingVertical: 8,
+		borderRadius: 6,
+		backgroundColor: 'rgba(255,185,126,0.36)',
+		marginBottom: 10,
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center'
+	},
+	userInfoAlertText: {
+		color: 'rgb(128,62,0)'
 	}
 })
 

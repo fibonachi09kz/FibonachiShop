@@ -19,16 +19,23 @@ const TabsNavigation = () => {
 	const user = useSelector(state => state.user)
 
 	return (
-		<Tab.Navigator>
+		<Tab.Navigator
+			screenOptions={{
+				tabBarStyle: {height: 60, paddingTop: 8},
+				tabBarLabelStyle: {paddingBottom: 8}
+			}}
+		>
 			<Tab.Screen
 				name="HomeStack"
 				component={StackNavigatorHome}
 				options={{
 					title: "Главная",
 						tabBarButton: (props) => <TouchableOpacity {...props} />,
-						tabBarIcon: ({ focused }) => <Ionicons name={'home'} size={24} />,
-						tabBarShowLabel: false,
-						headerShown: false
+						tabBarIcon: ({ focused }) => <Ionicons name={'home'} size={24} color={focused ? COLORS.mainRed : '#AFAFAF'} />,
+						tabBarShowLabel: true,
+						headerShown: false,
+						tabBarActiveTintColor: COLORS.mainRed,
+
 				}}
 			/>
 			<Tab.Screen
@@ -37,9 +44,10 @@ const TabsNavigation = () => {
 				options={{
 					title: "Категории",
 					tabBarButton: (props) => <TouchableOpacity {...props} />,
-					tabBarIcon: ({ focused }) => <Ionicons name={'grid'} size={24} />,
-					tabBarShowLabel: false,
-					headerShown: false
+					tabBarIcon: ({ focused }) => <Ionicons name={'grid'} size={24} color={focused ? COLORS.mainRed : '#AFAFAF'} />,
+					tabBarShowLabel: true,
+					headerShown: false,
+					tabBarActiveTintColor: COLORS.mainRed
 				}}
 			/>
 			<Tab.Screen
@@ -48,11 +56,12 @@ const TabsNavigation = () => {
 				options={{
 					title: "Избранное",
 					tabBarButton: (props) => <TouchableOpacity {...props} />,
-					tabBarIcon: ({ focused }) => <Ionicons name={'heart'} size={26} />,
-					tabBarShowLabel: false,
+					tabBarIcon: ({ focused }) => <Ionicons name={'heart'} size={26} color={focused ? COLORS.mainRed : '#AFAFAF'} />,
+					tabBarShowLabel: true,
 					tabBarBadge: favorites.length,
 					tabBarBadgeStyle: favorites.length ? {opacity: 1} : {opacity: 0},
-					headerShown: false
+					headerShown: false,
+					tabBarActiveTintColor: COLORS.mainRed
 				}}
 			/>
 			<Tab.Screen
@@ -61,11 +70,12 @@ const TabsNavigation = () => {
 				options={{
 					title: "Корзина",
 					tabBarButton: (props) => <TouchableOpacity {...props} />,
-					tabBarIcon: ({ focused }) => <Ionicons name={'basket'} size={28} />,
-					tabBarShowLabel: false,
+					tabBarIcon: ({ focused }) => <Ionicons name={'basket'} size={28} color={focused ? COLORS.mainRed : '#AFAFAF'} />,
+					tabBarShowLabel: true,
 					tabBarBadge: basket.length,
 					tabBarBadgeStyle: basket.length ? {opacity: 1} : {opacity: 0},
-					headerShown: false
+					headerShown: false,
+					tabBarActiveTintColor: COLORS.mainRed
 				}}
 			/>
 			<Tab.Screen
@@ -74,9 +84,10 @@ const TabsNavigation = () => {
 				options={{
 					title: "Профиль",
 					tabBarButton: (props) => <TouchableOpacity {...props} />,
-					tabBarIcon: ({ focused }) => <Ionicons name={'person-circle'} size={26} />,
-					tabBarShowLabel: false,
-					headerShown: false
+					tabBarIcon: ({ focused }) => <Ionicons name={'person-circle'} size={26} color={focused ? COLORS.mainRed : '#AFAFAF'} />,
+					tabBarShowLabel: true,
+					headerShown: false,
+					tabBarActiveTintColor: COLORS.mainRed
 				}}
 			/>
 		</Tab.Navigator>
