@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, RefreshControl } from "react-native";
 import CatalogCategories from "../../components/Catalog/CatalogCategories";
-import { getBXElementList, getBXSectionList } from "../../utils/fetching";
+import { getBXSectionList } from "../../utils/fetching";
 import CatalogProducts from "../../components/Catalog/CatalogProducts";
 import { LoaderScreen } from "react-native-ui-lib";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 const CatalogScreen = ({navigation}) => {
-	const [categories, setCategories] = useState([]);
-	const [products, setProducts] = useState([]);
+
+	const products = useTypedSelector(state => state.products)
+
 	const [tempProducts, setTempProducts] = useState(products)
+	const [categories, setCategories] = useState([]);
 	const [loading, setLoading] = useState(true);
 
 	function setProductsByCategory(categoryID) {
@@ -25,18 +28,7 @@ const CatalogScreen = ({navigation}) => {
 				setLoading(false)
 			}
 		}
-		async function getProducts() {
-			const data = await getBXElementList({
-				iblockId: 26
-			})
-			if (data.result.elements.length) {
-				setProducts(data.result.elements)
-				setTempProducts(data.result.elements)
-				setLoading(false)
-			}
-		}
 		getCategories()
-		getProducts()
 
 	}, [])
 
@@ -53,9 +45,7 @@ const CatalogScreen = ({navigation}) => {
 					</View>
 				</>
 			)}
-
 		</ScrollView>
-
 	)
 
 }

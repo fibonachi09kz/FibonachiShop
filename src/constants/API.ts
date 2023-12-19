@@ -11,6 +11,8 @@ type apiConstantsType = {
 	USER_AUTH_BY_GOOGLE: string
 }
 
+export const BASE_ENDPOINT = `${BASE_URL}/rest/1/${SECRET_KEY_WEBHOOK}`;
+
 const API_CONSTANTS: apiConstantsType = {
 	IBLOCK_ELEMENT_LIST: `${BASE_URL}/rest/1/${SECRET_KEY_WEBHOOK}/iblock.Element.list`,
 	IBLOCK_ELEMENT_GET: `${BASE_URL}/rest/1/${SECRET_KEY_WEBHOOK}/iblock.Element.get`,

@@ -9,14 +9,19 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 
 const ProductListed = ({ product, pressHandler }) => {
 
+	const price = product['MINIMUM_PRICE']['VALUE'];
+	const name = product['NAME'];
+	const id = product['ID'];
+
 	const [count, setCount] = useState(1)
 
-	const isFavorite = useSelector(state => state.favorites.includes(product['ID']));
+	const isFavorite = useSelector(state => state.favorites.includes(id));
 	const { toggleFavorites } = useActions()
 
-	const basketItem = useSelector(state => state.basket.find(item => item.id === product['ID']));
+	const basketItem = useSelector(state => state.basket.find(item => item.id === id));
 	const { addToBasket, removeFromBasket } = useActions()
 	let countInBasket = basketItem ? basketItem.count : 0;
+
 
 
 
@@ -33,10 +38,10 @@ const ProductListed = ({ product, pressHandler }) => {
 
 	const basketHandler = () => {
 		if (countInBasket) {
-			removeFromBasket(product['ID']);
+			removeFromBasket(id);
 		} else {
 			addToBasket({
-				id: product['ID'],
+				id: id,
 				count: count
 			});
 		}
@@ -56,8 +61,8 @@ const ProductListed = ({ product, pressHandler }) => {
 
 			<View style={styles.infoWrapper}>
 				<View style={styles.titleWrapper}>
-					<Text style={styles.productTitle} numberOfLines={1}>{product['NAME']}</Text>
-					<TouchableOpacity style={styles.favoriteBtn} onPress={() => toggleFavorites(product['ID'])}>
+					<Text style={styles.productTitle} numberOfLines={1}>{name}</Text>
+					<TouchableOpacity style={styles.favoriteBtn} onPress={() => toggleFavorites(id)}>
 						{isFavorite
 							?
 							<AntDesign name="heart" size={24} color="#d7000f" />
@@ -68,7 +73,7 @@ const ProductListed = ({ product, pressHandler }) => {
 				</View>
 
 				<Text style={styles.productDescription} numberOfLines={2}>{product.description}</Text>
-				<Text style={styles.productPrice}>1000 <Text>{CURRENCIES[0].symbol}</Text></Text>
+				<Text style={styles.productPrice}>{price} <Text>{CURRENCIES[0].symbol}</Text></Text>
 
 				<View style={styles.actions}>
 					<View style={styles.actionsWrapper}>
@@ -87,7 +92,7 @@ const ProductListed = ({ product, pressHandler }) => {
 							)
 							:
 							(
-								<Text style={styles.toBasketText}>В корзину {count * 1000} {CURRENCIES[0].symbol}</Text>
+								<Text style={styles.toBasketText}>В корзину {count * price} {CURRENCIES[0].symbol}</Text>
 							)
 						}
 					</TouchableOpacity>
@@ -137,7 +142,7 @@ const styles = StyleSheet.create({
 	productTitle: {
 		fontWeight: "600",
 		fontSize: 18,
-
+		color: COLORS.mainText
 	},
 	productDescription: {
 		marginBottom: 10

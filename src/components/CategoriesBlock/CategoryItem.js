@@ -1,12 +1,13 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, Touchable, TouchableOpacity } from "react-native";
+import { COLORS } from "../../constants/colors";
 
 
 function CategoryItem({ category, pressHandler }) {
 
 	return (
-		<Pressable style={styles.container} onPress={() => pressHandler(category['ID'])}>
+		<TouchableOpacity activeOpacity={0.7} style={styles.container} onPress={() => pressHandler(category['ID'])}>
 			<Text style={styles.title}>{category['NAME']}</Text>
-		</Pressable>
+		</TouchableOpacity>
 	);
 }
 
@@ -23,7 +24,8 @@ const styles = StyleSheet.create({
 	title: {
 		fontSize: 16,
 		textAlign: "center",
-		fontWeight: "600"
+		fontWeight: "600",
+		color: COLORS.mainText
 	}
 })
 

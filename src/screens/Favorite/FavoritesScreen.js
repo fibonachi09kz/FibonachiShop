@@ -1,33 +1,21 @@
 import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ProductListed from "../../components/Product/ProductListed";
-import {PRODUCTS} from "../../data/placeholder";
 import {COLORS} from "../../constants/colors";
 import {useSelector} from "react-redux";
 import { useEffect, useState } from "react";
-import { getBXElementList } from "../../utils/fetching";
-import { useNavigation } from "@react-navigation/native";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 const FavoritesScreen = ({ navigation }) => {
-	const router = useNavigation()
-	const [products, setProducts] = useState([]);
+	const products = useTypedSelector(state => state.products)
 	const [filteredProducts, setFilteredProducts] = useState([])
 	const favorites = useSelector(state => state.favorites)
 
+
 	useEffect(() => {
-		async function getProducts() {
-			const data = await getBXElementList({
-				iblockId: 26
-			})
-			if (data.result.elements.length) {
-				setFilteredProducts(data.result.elements.filter((product) =>
-					favorites.some(r => r === product['ID'])
-				))
-
-			}
-		}
-		getProducts()
+		setFilteredProducts(products.filter((product) =>
+			favorites.some(r => r === product['ID'])
+		))
 	}, [favorites])
-
 
 
 	const pressHandler = (product) => {
@@ -52,7 +40,7 @@ const FavoritesScreen = ({ navigation }) => {
 			<Text style={styles.title}>Избранное</Text>
 			<View style={styles.items}>
 				{filteredProducts.map((item) => (
-					<ProductListed key={item.id} product={item} />
+					<ProductListed key={item['ID']} product={item} />
 				))}
 			</View>
 		</ScrollView>
