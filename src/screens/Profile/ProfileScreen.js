@@ -2,6 +2,7 @@ import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native
 import {useContext, useEffect, useLayoutEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import ProfileInfo from "../../components/Profile/ProfileInfo/ProfileInfo";
 
 const ProfileScreen = ({ navigation }) => {
 
@@ -31,29 +32,22 @@ const ProfileScreen = ({ navigation }) => {
 	return (
 		<ScrollView style={styles.main}>
 			{!user.user['NAME'] && !user.user['LAST_NAME'] ?
-				(
-					<Text style={styles.title}>Привет!</Text>
-				)
+				<Text style={styles.title}>Привет!</Text>
 				:
-				(
-					<Text style={styles.title}>Привет, {user.user['NAME']} {user.user['LAST_NAME']}!</Text>
-				)
+				<Text style={styles.title}>Привет, {user.user['NAME']} {user.user['LAST_NAME']}!</Text>
 			}
 			<View>
-				{!user.user['NAME'] && !user.user['LAST_NAME'] ?
-					(
-						<TouchableOpacity style={styles.userInfoAlert} activeOpacity={0.7}>
-							<Text style={styles.userInfoAlertText}>Заполните, пожалуйста личные данные</Text>
-							<MaterialIcons name={'chevron-right'} size={20} />
-						</TouchableOpacity>
-					)
-					:
-					null
-				}
+
+				<TouchableOpacity style={styles.userInfoAlert} activeOpacity={0.7} onPress={() => navigation.navigate('ProfileInfo')}>
+					<Text style={styles.userInfoAlertText}>Заполните, пожалуйста личные данные</Text>
+					<MaterialIcons name={'chevron-right'} size={20} />
+				</TouchableOpacity>
+
 				<Text>Ваша почта: {user.user['EMAIL']}</Text>
 				<Text>Ваш токен: {user.token}</Text>
 				<Text>Время регистрации: {user.user['DATE_REGISTER']}</Text>
 			</View>
+			<ProfileInfo userID={user.user['ID']} token={user.token} />
 		</ScrollView>
 	);
 }

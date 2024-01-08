@@ -17,6 +17,7 @@ import {useActions} from "../hooks/useActions";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CatalogScreen from "../screens/Catalog/CatalogScreen";
+import ProfileInfoScreen from "../screens/Profile/ProfileInfoScreen";
 
 const Stack = createStackNavigator();
 
@@ -208,6 +209,7 @@ export const StackNavigatorFavorite = ({ navigation }) => {
 export const StackNavigatorProfile = ({ navigation }) => {
 
 	const { logoutUser } = useActions();
+	const user = useSelector(state => state.user);
 
 	const showAlert = () =>
 		Alert.alert(
@@ -244,6 +246,14 @@ export const StackNavigatorProfile = ({ navigation }) => {
 							<MaterialIcons name="logout" size={26} color="#000" />
 						</TouchableOpacity>
 					)
+				}}
+			/>
+
+			<Stack.Screen
+				name="ProfileInfo"
+				component={ProfileInfoScreen}
+				options={{
+					headerTitle: "Мои данные"
 				}}
 			/>
 

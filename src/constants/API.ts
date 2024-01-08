@@ -8,7 +8,8 @@ type apiConstantsType = {
 	IBLOCK_SECTION_LIST: string
 	USER_AUTH: string,
 	USER_REGISTRATION: string
-	USER_AUTH_BY_GOOGLE: string
+	USER_AUTH_BY_GOOGLE: string,
+	USER_PROFILE_INFO: string
 }
 
 export const BASE_ENDPOINT = `${BASE_URL}/rest/1/${SECRET_KEY_WEBHOOK}`;
@@ -20,7 +21,8 @@ const API_CONSTANTS: apiConstantsType = {
 	IBLOCK_SECTION_LIST: `${BASE_URL}/rest/1/${SECRET_KEY_WEBHOOK}/ib.section.list`,
 	USER_AUTH: `${BASE_URL}/rest/1/${SECRET_KEY_WEBHOOK}/user.auth`,
 	USER_REGISTRATION: `${BASE_URL}/rest/1/${SECRET_KEY_WEBHOOK}/user.registration`,
-	USER_AUTH_BY_GOOGLE: `${BASE_URL}/rest/1/${SECRET_KEY_WEBHOOK}/user.oauth2`
+	USER_AUTH_BY_GOOGLE: `${BASE_URL}/rest/1/${SECRET_KEY_WEBHOOK}/user.oauth2`,
+	USER_PROFILE_INFO: `${BASE_URL}/rest/1/${SECRET_KEY_WEBHOOK}/user.profile`
 }
 
 export default API_CONSTANTS;

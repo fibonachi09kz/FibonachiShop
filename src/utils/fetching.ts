@@ -28,7 +28,7 @@ export const getBXSectionList = async (params) => {
 	return await response.json();
 }
 
-export const getUserByGoogle = async (token) => {
+export const getUserByGoogle = async (token: string) => {
 	const response = await fetch(API_CONSTANTS.USER_AUTH_BY_GOOGLE, {
 		method: 'POST',
 		headers: {
@@ -39,5 +39,11 @@ export const getUserByGoogle = async (token) => {
 			token_id: token
 		})
 	});
+	return await response.json();
+}
+
+export const getUserProfileInfo = async ( params: { userId: string, tk: string } ) => {
+	const response = await fetch(API_CONSTANTS.USER_PROFILE_INFO + '?' + new URLSearchParams(params).toString());
+	console.log(API_CONSTANTS.USER_PROFILE_INFO + '?' + new URLSearchParams(params).toString())
 	return await response.json();
 }
