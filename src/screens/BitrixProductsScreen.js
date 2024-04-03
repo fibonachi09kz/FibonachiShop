@@ -8,7 +8,7 @@ const BitrixProductsScreen = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		async function fetchProducts() {
 			let response = await fetch(`${API_CONSTANTS.IBLOCK_ELEMENT_LIST}?iblockId=26&select[]=ID&select[]=NAME&select[]=DETAIL_PICTURE&select[]=DETAIL_TEXT`);
 			let productsData = await response.json()
