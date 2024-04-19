@@ -10,44 +10,43 @@ import { api, useGetProductsQuery } from "../store/api/api";
 import { objectToQueryString } from "../functions/objectToQueryString";
 
 const EntryPoint = () => {
+  useGetProductsQuery(
+    objectToQueryString({
+      iblockId: 26,
+      select: [
+        'DETAIL_PICTURE',
+        'IBLOCK_SECTION_ID',
+        'NAME',
+        'MINIMUM_PRICE',
+        'MAXIMUM_PRICE',
+      ],
+    })
+  );
 
-	useGetProductsQuery(objectToQueryString({
-		iblockId: 26,
-		select: ['DETAIL_PICTURE', 'IBLOCK_SECTION_ID', 'NAME', 'MINIMUM_PRICE', 'MAXIMUM_PRICE']
-	}))
+  const { loginUser } = useActions();
+  const user = useSelector((state) => state.user);
 
+  useEffect(() => {
+    const restoreUser = async () => {
+      const authToken = await AsyncStorage.getItem('authToken');
+      if (authToken && !user.isAuthenticated) {
+        console.log(authToken);
+      }
+    };
+    restoreUser();
+    deviceInfoAction();
+  }, []);
 
+  return (
+    <>
+      <StatusBar />
 
-	const { loginUser } = useActions();
-	const user = useSelector(state => state.user)
-
-	useEffect(() => {
-
-		const restoreUser = async () => {
-			const authToken = await AsyncStorage.getItem('authToken');
-			if (authToken && !user.isAuthenticated) {
-				console.log(authToken)
-			}
-		}
-		restoreUser()
-		deviceInfoAction();
-	}, [])
-
-	return (
-		<>
-			<StatusBar />
-
-			<View style={{ flex: 1 }}>
-
-				<NavigationContainer>
-
-					<DrawerNavigation />
-
-				</NavigationContainer>
-
-			</View>
-		</>
-
-	)
-}
+      <View style={{ flex: 1 }}>
+        <NavigationContainer>
+          <DrawerNavigation />
+        </NavigationContainer>
+      </View>
+    </>
+  );
+};
 export default EntryPoint;
